@@ -27,6 +27,7 @@ import java.util.Locale;
 import static com.example.memorableplacecb2jav.MainActivity.arrayAdapter;
 import static com.example.memorableplacecb2jav.MainActivity.location;
 import static com.example.memorableplacecb2jav.MainActivity.places;
+import static com.example.memorableplacecb2jav.MainActivity.value;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
 
@@ -256,7 +257,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
            //mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney)); // jika kita ingin mengatur pengaturan awal kamera di bagian ini
            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney,14)); // maka kamera akan di zoom
         }else {
-           Toast.makeText(this, "salah " + positionlist, Toast.LENGTH_SHORT).show();
+            int devalue = Integer.parseInt(value);
+           Toast.makeText(this, "salah " + devalue, Toast.LENGTH_SHORT).show();
                       // Toast.makeText(MapsActivity.this, positionlist, Toast.LENGTH_SHORT).show(); // to see list array yang di klik
 //            LatLng sydney = new LatLng(-5.1555597,119.4826823); // lokasi mesjid ali hizaam
 //            // mMap.addMarker(new MarkerOptions().position(sydney).title("INI MESJID ALI HIZAAM")); // nama dari tujuannya // dan tanda penunjuknya merah
@@ -268,11 +270,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
              //Toast.makeText(this, "lokasinya "+ likecount, Toast.LENGTH_SHORT).show(); // to see list array yang di klik
 
                         Location placeLocation = new Location(LocationManager.GPS_PROVIDER);
-             placeLocation.setLatitude(MainActivity.location.get(intent.getIntExtra("position", 0)).latitude);
-            placeLocation.setLongitude(MainActivity.location.get(intent.getIntExtra("position", 0)).longitude);
+             placeLocation.setLatitude(MainActivity.location.get(intent.getIntExtra("position", devalue)).latitude);
+            placeLocation.setLongitude(MainActivity.location.get(intent.getIntExtra("position", devalue)).longitude);
 
             LatLng userLocation = new LatLng(placeLocation.getLatitude(), placeLocation.getLongitude());
-            //mMap.clear(); // untuk menghapus map yang sebelumnya di pilih
+            mMap.clear(); // untuk menghapus map yang sebelumnya di pilih
             mMap.addMarker(new MarkerOptions().position(userLocation).title(positionlist)); // untuk nambahkan marker atau tanda sesuai dengan  pilihan user.
             mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(userLocation,14)); // new camera dan jarak zoom kameranya
 
